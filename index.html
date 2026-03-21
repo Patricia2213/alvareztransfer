@@ -231,11 +231,11 @@
   .cot-hor-btn span { font-size: 11px; opacity: 0.6; }
   .cot-hor-btn:hover { border-color: rgba(201,168,76,0.4); color: var(--gold); }
   .cot-hor-btn.active { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold); }
-  .cotizador-result { background: var(--dark3); border: 1px solid rgba(201,168,76,0.12); border-radius: 12px; padding: 40px; min-height: 320px; display: flex; align-items: center; justify-content: center; }
+  .cotizador-result { padding: 24px 0 0 0; }
   .cot-result-empty { text-align: center; color: var(--text-muted); }
   .cot-result-icon { font-size: 40px; margin-bottom: 16px; }
   .cot-result-empty p { font-size: 15px; line-height: 1.6; }
-  .cot-result-card { width: 100%; display: flex; flex-direction: column; gap: 20px; }
+  .cot-result-card { width: 100%; display: flex; flex-direction: column; gap: 16px; }
   .cot-maps-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); text-decoration: none; font-size: 16px; font-weight: 500; transition: opacity .2s; }
   .cot-maps-link:hover { opacity: 0.8; }
   .cot-result-km { font-size: 13px; color: var(--text-muted); }
@@ -987,7 +987,6 @@ function selectPax(btn, pax) {
       if (msg) btn.href = 'https://wa.me/34638110643?text=' + encodeURIComponent(msg);
     }
   });
-  });
   mostrarPrecio();
 }
 
@@ -1267,4 +1266,32 @@ function setLang(l) {
 ocument.getElementById('fLblContacto'); if(flc) flc.textContent=t.f_contacto;
   var flo=document.getElementById('fLblOrigen'); if(flo) flo.textContent=t.f_origen;
   var fo0=document.getElementById('fOrigenOpt0'); if(fo0) fo0.textContent=t.f_origen_sel;
-  var fo1=document.getElementById('fOrigenOpt1'); if(fo1) fo1.textCo
+  var fo1=document.getElementById('fOrigenOpt1'); if(fo1) fo1.textContent=t.f_origen_1;
+  var fo2=document.getElementById('fOrigenOpt2'); if(fo2) fo2.textContent=t.f_origen_2;
+  var fo3=document.getElementById('fOrigenOpt3'); if(fo3) fo3.textContent=t.f_origen_3;
+  var fo4=document.getElementById('fOrigenOpt4'); if(fo4) fo4.textContent=t.f_origen_4;
+  var cfl=document.getElementById('fechaLbl'); if(cfl) cfl.textContent=t.fecha_lbl;
+  // Excursiones
+  e=document.getElementById('excLabel'); if(e) e.textContent=t.exc_label;
+  e=document.getElementById('excTitle'); if(e) e.innerHTML=t.exc_title;
+  e=document.getElementById('excSub');   if(e) e.textContent=t.exc_sub;
+  e=document.getElementById('navExcursiones'); if(e) e.textContent=t.nav_excursiones;
+  document.querySelectorAll('.exc-btn-txt').forEach(function(b){ b.textContent=t.exc_btn_txt; });
+  document.querySelectorAll('.exc-card').forEach(function(card) {
+    var nameEl = card.querySelector('.exc-card-name');
+    var descEl = card.querySelector('.exc-card-desc');
+    var durEl  = card.querySelector('.exc-dur');
+    var grpEl  = card.querySelector('.exc-group');
+    var btn    = card.querySelector('.exc-btn');
+    if (nameEl) { var n = card.getAttribute('data-name-' + l); if (n) nameEl.textContent = n; }
+    if (descEl) { var d = card.getAttribute('data-desc-' + l); if (d) descEl.textContent = d; }
+    if (durEl)  { var du = card.getAttribute('data-dur-' + l);  if (du) durEl.textContent = du; }
+    if (grpEl)  { var g = card.getAttribute('data-group-' + l); if (g) grpEl.textContent = g; }
+    if (btn)    { var msg = btn.getAttribute('data-msg-' + l);   if (msg) btn.href = 'https://wa.me/34638110643?text=' + encodeURIComponent(msg); }
+  });
+  mostrarPrecio();
+}
+</script>
+
+</body>
+</html>
