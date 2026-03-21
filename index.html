@@ -315,43 +315,19 @@ var STRIPE_PK = document.querySelector('meta[name="stripe-pk"]').content;
 
 function pagarOnline() {
   if (!DEST || !DEST.destino) return;
-  var btn = document.getElementById('cotPayBtn');
-  if (btn) { btn.classList.add('loading'); btn.textContent = 'Procesando...'; }
-
   var raw = DEST[PAX];
+  if (!raw || raw === '-') return;
   var base = parseInt(raw, 10);
   var noc = (HORA === 'nocturno');
-  var precioBase = noc ? Math.round(base * 1.15) : base;
-  var extra = extTotal();
-  var total = precioBase + extra;
+  var total = (noc ? Math.round(base * 1.15) : base) + extTotal();
   var eTxt = extTexto();
   var fechaEl = document.getElementById('cotFecha');
-  var fecha = fechaEl ? fechaEl.value : '';
-
-  fetch('/.netlify/functions/create-payment', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      destino: DEST.destino,
-      pasajeros: PAX_LBL[PAX],
-      precio: total,
-      fecha: fecha,
-      extras: eTxt || null
-    })
-  })
-  .then(function(r){ return r.json(); })
-  .then(function(data){
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      mostrarToast('error', data.error || 'Error al conectar con el sistema de pago.');
-      if (btn) { btn.classList.remove('loading'); btn.textContent = ' Pagar ahora con tarjeta'; }
-    }
-  })
-  .catch(function(){
-    mostrarToast('error', 'No se pudo conectar con el servidor de pago.');
-    if (btn) { btn.classList.remove('loading'); btn.textContent = ' Pagar ahora con tarjeta'; }
-  });
+  var fecha = fechaEl && fechaEl.value ? fechaEl.value : '';
+  var ref = DEST.destino + ' | ' + PAX_LBL[PAX] + ' | ' + total + 'EUR';
+  if (eTxt) ref += ' | ' + eTxt;
+  if (fecha) ref += ' | ' + fecha;
+  var url = 'https://buy.stripe.com/test_8x228sf842lZatd63h7Vm00?locale=es&client_reference_id=' + encodeURIComponent(ref);
+  window.location.href = url;
 }
 
 function mostrarToast(tipo, msg) {
