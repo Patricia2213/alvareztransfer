@@ -333,6 +333,12 @@
   @media (max-width: 900px) { .excursiones-grid { grid-template-columns: 1fr 1fr; } .excursiones-section { padding: 64px 20px; } }
   @media (max-width: 600px) { .excursiones-grid { grid-template-columns: 1fr; } }
 
+
+  .txt-en, .txt-de { display: none !important; }
+  html[lang="en"] .txt-es, html[lang="de"] .txt-es { display: none !important; }
+  html[lang="en"] .txt-en { display: inline !important; }
+  html[lang="de"] .txt-de { display: inline !important; }
+
 </style>
   <script src="https://elfsightcdn.com/platform.js" async>
 // ---- RESEÑAS ----
@@ -547,7 +553,6 @@ window.addEventListener('DOMContentLoaded', function(){
 
     <div class="cotizador-result" id="cotResult">
       <div class="cot-result-empty">
-        <div class="cot-result-icon">🗺️</div>
         <p>Introduce tu destino para ver el precio</p>
       </div>
     </div>
@@ -582,7 +587,7 @@ window.addEventListener('DOMContentLoaded', function(){
   <p class="section-sub" id="excSub">Descubre lo mejor de la isla con nuestros minibuses privados. Rutas personalizadas para grupos de hasta 16 personas. Pide tu presupuesto sin compromiso.</p>
   <div class="excursiones-grid">
     
-    <div class="exc-card"
+    <div class="exc-card" data-idx="0"
       data-desc-en="Route through the Tramuntana mountains, stopping in Valldemossa, Deià and the picturesque Port of Sóller. UNESCO World Heritage."
       data-desc-de="Route durch das Tramuntana-Gebirge mit Stopps in Valldemossa, Deià und dem malerischen Hafen von Sóller. UNESCO-Welterbe."
       data-dur-en="Full day"
@@ -590,17 +595,32 @@ window.addEventListener('DOMContentLoaded', function(){
       data-group-en="Groups up to 16 pax"
       data-group-de="Gruppen bis 16 Pers."
       data-name-en="Tramuntana & Sóller"
-      data-name-de="Tramuntana & Sóller">
+      data-name-de="Tramuntana & Sóller" id="exc-card-0">
       <div class="exc-icon">🏔️</div>
-      <h3 class="exc-card-name">Tramuntana & Sóller</h3>
+      <h3 class="exc-card-name">
+        <span class="txt-es">Tramuntana & Sóller</span>
+        <span class="txt-en" style="display:none">Tramuntana & Sóller</span>
+        <span class="txt-de" style="display:none">Tramuntana & Sóller</span>
+      </h3>
       <div class="exc-meta">
-        <span class="exc-tag dur exc-dur">1 día completo</span>
-        <span class="exc-tag group exc-group">Grupos hasta 16 pax</span>
+        <span class="exc-tag dur exc-dur">
+          <span class="txt-es">1 día completo</span>
+          <span class="txt-en" style="display:none">Full day</span>
+          <span class="txt-de" style="display:none">Ganztag</span>
+        </span>
+        <span class="exc-tag group exc-group">
+          <span class="txt-es">Grupos hasta 16 pax</span>
+          <span class="txt-en" style="display:none">Groups up to 16 pax</span>
+          <span class="txt-de" style="display:none">Gruppen bis 16 Pers.</span>
+        </span>
       </div>
-      <p class="exc-card-desc">Ruta por la Sierra de Tramuntana, parada en Valldemossa, Deià y el pintoresco Puerto de Sóller. Patrimonio de la Humanidad UNESCO.</p>
+      <p class="exc-card-desc">
+        <span class="txt-es">Ruta por la Sierra de Tramuntana, parada en Valldemossa, Deià y el pintoresco Puerto de Sóller. Patrimonio de la Humanidad UNESCO.</span>
+        <span class="txt-en" style="display:none">Route through the Tramuntana mountains, stopping in Valldemossa, Deià and the picturesque Port of Sóller. UNESCO World Heritage.</span>
+        <span class="txt-de" style="display:none">Route durch das Tramuntana-Gebirge mit Stopps in Valldemossa, Deià und dem malerischen Hafen von Sóller. UNESCO-Welterbe.</span></p>
       <a class="exc-btn" href="https://wa.me/34638110643?text=Hola,%20me%20gustaría%20pedir%20presupuesto%20para%20la%20excursión:%20Tramuntana%20&%20Sóller.%20¿Podéis%20indicarme%20precio%20para%20mi%20fecha%20y%20número%20de%20personas?" target="_blank" data-msg-en="Hello, I'd like a quote for the excursion: Tramuntana & Sóller. Could you let me know the price for my date and number of people?" data-msg-de="Hallo, ich möchte ein Angebot für den Ausflug: Tramuntana & Sóller. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?" data-msg-es="Hola, me gustaría pedir presupuesto para la excursión: Tramuntana & Sóller. ¿Podéis indicarme precio para mi fecha y número de personas?"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span class="exc-btn-txt">Pedir presupuesto</span></a>
     </div>
-    <div class="exc-card"
+    <div class="exc-card" data-idx="1"
       data-desc-en="Visit to the Formentor Lighthouse, one of the most spectacular views in Mallorca, followed by the charming Port de Pollença."
       data-desc-de="Besuch des Leuchtturms von Formentor, einer der spektakulärsten Aussichten Mallorcas, gefolgt vom charmanten Port de Pollença."
       data-dur-en="Full day"
@@ -608,17 +628,32 @@ window.addEventListener('DOMContentLoaded', function(){
       data-group-en="Groups up to 16 pax"
       data-group-de="Gruppen bis 16 Pers."
       data-name-en="Formentor & Port de Pollença"
-      data-name-de="Formentor & Port de Pollença">
+      data-name-de="Formentor & Port de Pollença" id="exc-card-1">
       <div class="exc-icon">🚢</div>
-      <h3 class="exc-card-name">Formentor & Port de Pollença</h3>
+      <h3 class="exc-card-name">
+        <span class="txt-es">Formentor & Port de Pollença</span>
+        <span class="txt-en" style="display:none">Formentor & Port de Pollença</span>
+        <span class="txt-de" style="display:none">Formentor & Port de Pollença</span>
+      </h3>
       <div class="exc-meta">
-        <span class="exc-tag dur exc-dur">1 día completo</span>
-        <span class="exc-tag group exc-group">Grupos hasta 16 pax</span>
+        <span class="exc-tag dur exc-dur">
+          <span class="txt-es">1 día completo</span>
+          <span class="txt-en" style="display:none">Full day</span>
+          <span class="txt-de" style="display:none">Ganztag</span>
+        </span>
+        <span class="exc-tag group exc-group">
+          <span class="txt-es">Grupos hasta 16 pax</span>
+          <span class="txt-en" style="display:none">Groups up to 16 pax</span>
+          <span class="txt-de" style="display:none">Gruppen bis 16 Pers.</span>
+        </span>
       </div>
-      <p class="exc-card-desc">Visita al Faro de Formentor, una de las vistas más espectaculares de Mallorca, seguida del encantador Port de Pollença.</p>
+      <p class="exc-card-desc">
+        <span class="txt-es">Visita al Faro de Formentor, una de las vistas más espectaculares de Mallorca, seguida del encantador Port de Pollença.</span>
+        <span class="txt-en" style="display:none">Visit to the Formentor Lighthouse, one of the most spectacular views in Mallorca, followed by the charming Port de Pollença.</span>
+        <span class="txt-de" style="display:none">Besuch des Leuchtturms von Formentor, einer der spektakulärsten Aussichten Mallorcas, gefolgt vom charmanten Port de Pollença.</span></p>
       <a class="exc-btn" href="https://wa.me/34638110643?text=Hola,%20me%20gustaría%20pedir%20presupuesto%20para%20la%20excursión:%20Formentor%20&%20Port%20de%20Pollença.%20¿Podéis%20indicarme%20precio%20para%20mi%20fecha%20y%20número%20de%20personas?" target="_blank" data-msg-en="Hello, I'd like a quote for the excursion: Formentor & Port de Pollença. Could you let me know the price for my date and number of people?" data-msg-de="Hallo, ich möchte ein Angebot für den Ausflug: Formentor & Port de Pollença. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?" data-msg-es="Hola, me gustaría pedir presupuesto para la excursión: Formentor & Port de Pollença. ¿Podéis indicarme precio para mi fecha y número de personas?"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span class="exc-btn-txt">Pedir presupuesto</span></a>
     </div>
-    <div class="exc-card"
+    <div class="exc-card" data-idx="2"
       data-desc-en="The famous Coves del Drach with Europe's largest underground lake and a classical music concert. Stop in Porto Cristo."
       data-desc-de="Die berühmten Coves del Drach mit Europas größtem Untersee und einem klassischen Konzert. Stopp in Porto Cristo."
       data-dur-en="Half day (4–5h)"
@@ -626,17 +661,32 @@ window.addEventListener('DOMContentLoaded', function(){
       data-group-en="Groups up to 16 pax"
       data-group-de="Gruppen bis 16 Pers."
       data-name-en="Coves del Drach & Porto Cristo"
-      data-name-de="Coves del Drach & Porto Cristo">
+      data-name-de="Coves del Drach & Porto Cristo" id="exc-card-2">
       <div class="exc-icon">🐉</div>
-      <h3 class="exc-card-name">Coves del Drach & Porto Cristo</h3>
+      <h3 class="exc-card-name">
+        <span class="txt-es">Coves del Drach & Porto Cristo</span>
+        <span class="txt-en" style="display:none">Coves del Drach & Porto Cristo</span>
+        <span class="txt-de" style="display:none">Coves del Drach & Porto Cristo</span>
+      </h3>
       <div class="exc-meta">
-        <span class="exc-tag dur exc-dur">Medio día (4–5h)</span>
-        <span class="exc-tag group exc-group">Grupos hasta 16 pax</span>
+        <span class="exc-tag dur exc-dur">
+          <span class="txt-es">Medio día (4–5h)</span>
+          <span class="txt-en" style="display:none">Half day (4–5h)</span>
+          <span class="txt-de" style="display:none">Halbtag (4–5 Std.)</span>
+        </span>
+        <span class="exc-tag group exc-group">
+          <span class="txt-es">Grupos hasta 16 pax</span>
+          <span class="txt-en" style="display:none">Groups up to 16 pax</span>
+          <span class="txt-de" style="display:none">Gruppen bis 16 Pers.</span>
+        </span>
       </div>
-      <p class="exc-card-desc">Las famosas Coves del Drach con el lago subterráneo más grande de Europa y concierto de música clásica incluido. Parada en Porto Cristo.</p>
+      <p class="exc-card-desc">
+        <span class="txt-es">Las famosas Coves del Drach con el lago subterráneo más grande de Europa y concierto de música clásica incluido.</span>
+        <span class="txt-en" style="display:none">The famous Dragon Caves with Europe's largest underground lake and a classical music concert included.</span>
+        <span class="txt-de" style="display:none">Die berühmten Drachenhöhlen mit Europas größtem Untersee und einem klassischen Konzert inklusive.</span> Parada en Porto Cristo.</p>
       <a class="exc-btn" href="https://wa.me/34638110643?text=Hola,%20me%20gustaría%20pedir%20presupuesto%20para%20la%20excursión:%20Coves%20del%20Drac%20&%20Porto%20Cristo.%20¿Podéis%20indicarme%20precio%20para%20mi%20fecha%20y%20número%20de%20personas?" target="_blank" data-msg-en="Hello, I'd like a quote for the excursion: Coves del Drach & Porto Cristo. Could you let me know the price for my date and number of people?" data-msg-de="Hallo, ich möchte ein Angebot für den Ausflug: Coves del Drach & Porto Cristo. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?" data-msg-es="Hola, me gustaría pedir presupuesto para la excursión: Coves del Drach & Porto Cristo. ¿Podéis indicarme precio para mi fecha y número de personas?"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span class="exc-btn-txt">Pedir presupuesto</span></a>
     </div>
-    <div class="exc-card"
+    <div class="exc-card" data-idx="3"
       data-desc-en="Tour of Palma's old town, La Seu Cathedral, the Almudaina Palace and the Santa Catalina neighbourhood."
       data-desc-de="Rundgang durch Palmas Altstadt, die Kathedrale La Seu, den Almudaina-Palast und das Viertel Santa Catalina."
       data-dur-en="Half day (3–4h)"
@@ -644,17 +694,32 @@ window.addEventListener('DOMContentLoaded', function(){
       data-group-en="Groups up to 16 pax"
       data-group-de="Gruppen bis 16 Pers."
       data-name-en="Palma City & Cathedral"
-      data-name-de="Palma Stadt & Kathedrale">
+      data-name-de="Palma Stadt & Kathedrale" id="exc-card-3">
       <div class="exc-icon">🏛️</div>
-      <h3 class="exc-card-name">Palma Ciudad & Catedral</h3>
+      <h3 class="exc-card-name">
+        <span class="txt-es">Palma Ciudad & Catedral</span>
+        <span class="txt-en" style="display:none">Palma City & Cathedral</span>
+        <span class="txt-de" style="display:none">Palma Stadt & Kathedrale</span>
+      </h3>
       <div class="exc-meta">
-        <span class="exc-tag dur exc-dur">Medio día (3–4h)</span>
-        <span class="exc-tag group exc-group">Grupos hasta 16 pax</span>
+        <span class="exc-tag dur exc-dur">
+          <span class="txt-es">Medio día (3–4h)</span>
+          <span class="txt-en" style="display:none">Half day (3–4h)</span>
+          <span class="txt-de" style="display:none">Halbtag (3–4 Std.)</span>
+        </span>
+        <span class="exc-tag group exc-group">
+          <span class="txt-es">Grupos hasta 16 pax</span>
+          <span class="txt-en" style="display:none">Groups up to 16 pax</span>
+          <span class="txt-de" style="display:none">Gruppen bis 16 Pers.</span>
+        </span>
       </div>
-      <p class="exc-card-desc">Recorrido por el casco antiguo de Palma, la Catedral de La Seu, el Palau de l'Almudaina y el barrio de Santa Catalina.</p>
+      <p class="exc-card-desc">
+        <span class="txt-es">Recorrido por el casco antiguo de Palma, la Catedral de La Seu, el Palau de l'Almudaina y el barrio de Santa Catalina.</span>
+        <span class="txt-en" style="display:none">Tour of Palma's old town, La Seu Cathedral, the Almudaina Palace and the Santa Catalina neighbourhood.</span>
+        <span class="txt-de" style="display:none">Rundgang durch Palmas Altstadt, die Kathedrale La Seu, den Almudaina-Palast und das Viertel Santa Catalina.</span></p>
       <a class="exc-btn" href="https://wa.me/34638110643?text=Hola,%20me%20gustaría%20pedir%20presupuesto%20para%20la%20excursión:%20Palma%20Ciudad%20&%20Catedral.%20¿Podéis%20indicarme%20precio%20para%20mi%20fecha%20y%20número%20de%20personas?" target="_blank" data-msg-en="Hello, I'd like a quote for the excursion: Palma City & Cathedral. Could you let me know the price for my date and number of people?" data-msg-de="Hallo, ich möchte ein Angebot für den Ausflug: Palma Stadt & Kathedrale. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?" data-msg-es="Hola, me gustaría pedir presupuesto para la excursión: Palma Ciudad & Catedral. ¿Podéis indicarme precio para mi fecha y número de personas?"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span class="exc-btn-txt">Pedir presupuesto</span></a>
     </div>
-    <div class="exc-card"
+    <div class="exc-card" data-idx="4"
       data-desc-en="Discover the crystal-clear waters of the east coast: Cala d'Or, the Mondragó Natural Park and the quietest coves on the island."
       data-desc-de="Entdecken Sie das kristallklare Wasser der Ostküste: Cala d'Or, den Naturpark Mondragó und die ruhigsten Buchten der Insel."
       data-dur-en="Full day"
@@ -662,17 +727,33 @@ window.addEventListener('DOMContentLoaded', function(){
       data-group-en="Groups up to 16 pax"
       data-group-de="Gruppen bis 16 Pers."
       data-name-en="East Calas: Cala d'Or & Mondragó"
-      data-name-de="Ostküste: Cala d'Or & Mondragó">
+      data-name-de="Ostküste: Cala d'Or & Mondragó" id="exc-card-4">
       <div class="exc-icon">🌊</div>
-      <h3 class="exc-card-name">Calas del Este: Cala d'Or & Mondragó</h3>
+      <h3 class="exc-card-name">
+        <span class="txt-es">Calas del Este: Cala d'Or & Mondragó</span>
+        <span class="txt-en" style="display:none">East Calas: Cala d'Or & Mondragó</span>
+        <span class="txt-de" style="display:none">Ostküste: Cala d'Or & Mondragó</span>
+      </h3>
       <div class="exc-meta">
-        <span class="exc-tag dur exc-dur">1 día completo</span>
-        <span class="exc-tag group exc-group">Grupos hasta 16 pax</span>
+        <span class="exc-tag dur exc-dur">
+          <span class="txt-es">1 día completo</span>
+          <span class="txt-en" style="display:none">Full day</span>
+          <span class="txt-de" style="display:none">Ganztag</span>
+        </span>
+        <span class="exc-tag group exc-group">
+          <span class="txt-es">Grupos hasta 16 pax</span>
+          <span class="txt-en" style="display:none">Groups up to 16 pax</span>
+          <span class="txt-de" style="display:none">Gruppen bis 16 Pers.</span>
+        </span>
       </div>
-      <p class="exc-card-desc">Descubre las aguas cristalinas de la costa este: Cala d'Or, el Parque Natural de Mondragó y las calas más tranquilas de la isla.</p>
+      <p class="exc-card-desc">
+        <span class="txt-es">Descubre las aguas cristalinas de la costa este: Cala d'Or, el Parque Natural de Mondragó y las calas más tranquilas.</span>
+        <span class="txt-en" style="display:none">Discover the crystal-clear waters of the east coast: Cala d'Or, the Mondragó Natural Park and the quietest coves.</span>
+        <span class="txt-de" style="display:none">Entdecken Sie das kristallklare Wasser der Ostküste: Cala d'Or, den Naturpark Mondragó und die ruhigsten Buchten.</span>
+      </p>
       <a class="exc-btn" href="https://wa.me/34638110643?text=Hola,%20me%20gustaría%20pedir%20presupuesto%20para%20la%20excursión:%20Calas%20del%20Este:%20Cala%20d'Or%20&%20Mondragó.%20¿Podéis%20indicarme%20precio%20para%20mi%20fecha%20y%20número%20de%20personas?" target="_blank" data-msg-en="Hello, I'd like a quote for the excursion: East Calas: Cala d'Or & Mondragó. Could you let me know the price for my date and number of people?" data-msg-de="Hallo, ich möchte ein Angebot für den Ausflug: Ostküste: Cala d'Or & Mondragó. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?" data-msg-es="Hola, me gustaría pedir presupuesto para la excursión: Calas del Este: Cala d'Or & Mondragó. ¿Podéis indicarme precio para mi fecha y número de personas?"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span class="exc-btn-txt">Pedir presupuesto</span></a>
     </div>
-    <div class="exc-card"
+    <div class="exc-card" data-idx="5"
       data-desc-en="Visit to D.O. Binissalem wineries, Mallorcan wine tastings, lunch at a rural estate and a stroll through the inland villages."
       data-desc-de="Besuch der D.O. Binissalem Weingüter, mallorquinische Weinverkostungen, Mittagessen auf einem Landgut und Spaziergang durch die Innenstädte."
       data-dur-en="Full day"
@@ -680,14 +761,30 @@ window.addEventListener('DOMContentLoaded', function(){
       data-group-en="Groups up to 16 pax"
       data-group-de="Gruppen bis 16 Pers."
       data-name-en="Wine Route & Wineries"
-      data-name-de="Weinroute & Weingüter">
+      data-name-de="Weinroute & Weingüter" id="exc-card-5">
       <div class="exc-icon">🍷</div>
-      <h3 class="exc-card-name">Ruta del Vino & Bodegas</h3>
+      <h3 class="exc-card-name">
+        <span class="txt-es">Ruta del Vino & Bodegas</span>
+        <span class="txt-en" style="display:none">Wine Route & Wineries</span>
+        <span class="txt-de" style="display:none">Weinroute & Weingüter</span>
+      </h3>
       <div class="exc-meta">
-        <span class="exc-tag dur exc-dur">1 día completo</span>
-        <span class="exc-tag group exc-group">Grupos hasta 16 pax</span>
+        <span class="exc-tag dur exc-dur">
+          <span class="txt-es">1 día completo</span>
+          <span class="txt-en" style="display:none">Full day</span>
+          <span class="txt-de" style="display:none">Ganztag</span>
+        </span>
+        <span class="exc-tag group exc-group">
+          <span class="txt-es">Grupos hasta 16 pax</span>
+          <span class="txt-en" style="display:none">Groups up to 16 pax</span>
+          <span class="txt-de" style="display:none">Gruppen bis 16 Pers.</span>
+        </span>
       </div>
-      <p class="exc-card-desc">Visita a bodegas de la D.O. Binissalem, catas de vino mallorquín, almuerzo en finca rural y paseo por los pueblos del interior.</p>
+      <p class="exc-card-desc">
+        <span class="txt-es">Visita a bodegas de la D.O. Binissalem, catas de vino mallorquín, almuerzo en finca rural y paseo por pueblos del interior.</span>
+        <span class="txt-en" style="display:none">Visit to D.O. Binissalem wineries, Mallorcan wine tastings, lunch at a rural estate and a stroll through inland villages.</span>
+        <span class="txt-de" style="display:none">Besuch der D.O. Binissalem Weingüter, mallorquinische Weinverkostungen, Mittagessen auf einem Landgut.</span>
+      </p>
       <a class="exc-btn" href="https://wa.me/34638110643?text=Hola,%20me%20gustaría%20pedir%20presupuesto%20para%20la%20excursión:%20Ruta%20del%20Vino%20&%20Bodegas.%20¿Podéis%20indicarme%20precio%20para%20mi%20fecha%20y%20número%20de%20personas?" target="_blank" data-msg-en="Hello, I'd like a quote for the excursion: Wine Route & Wineries. Could you let me know the price for my date and number of people?" data-msg-de="Hallo, ich möchte ein Angebot für den Ausflug: Weinroute & Weingüter. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?" data-msg-es="Hola, me gustaría pedir presupuesto para la excursión: Ruta del Vino & Bodegas. ¿Podéis indicarme precio para mi fecha y número de personas?"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span class="exc-btn-txt">Pedir presupuesto</span></a>
     </div>
   </div>
@@ -957,34 +1054,23 @@ function selectPax(btn, pax) {
   e=document.getElementById('excSub');   if(e) e.textContent=t.exc_sub;
   e=document.getElementById('navExcursiones'); if(e) e.textContent=t.nav_excursiones;
   document.querySelectorAll('.exc-btn-txt').forEach(function(b){ b.textContent=t.exc_btn_txt; });
-  // Traduce cada tarjeta de excursión
+  var excData = {"es": [{"name": "Tramuntana & Sóller", "desc": "Ruta por la Sierra de Tramuntana, parada en Valldemossa, Deià y el pintoresco Puerto de Sóller. Patrimonio de la Humanidad UNESCO.", "dur": "1 día completo", "group": "Grupos hasta 16 pax"}, {"name": "Formentor & Port de Pollença", "desc": "Visita al Faro de Formentor, una de las vistas más espectaculares de Mallorca, seguida del encantador Port de Pollença.", "dur": "1 día completo", "group": "Grupos hasta 16 pax"}, {"name": "Coves del Drach & Porto Cristo", "desc": "Las famosas Coves del Drach con el lago subterráneo más grande de Europa y concierto de música clásica incluido. Parada en Porto Cristo.", "dur": "Medio día (4–5h)", "group": "Grupos hasta 16 pax"}, {"name": "Palma Ciudad & Catedral", "desc": "Recorrido por el casco antiguo de Palma, la Catedral de La Seu, el Palau de l'Almudaina y el barrio de Santa Catalina.", "dur": "Medio día (3–4h)", "group": "Grupos hasta 16 pax"}, {"name": "Calas del Este: Cala d'Or & Mondragó", "desc": "Descubre las aguas cristalinas de la costa este: Cala d'Or, el Parque Natural de Mondragó y las calas más tranquilas de la isla.", "dur": "1 día completo", "group": "Grupos hasta 16 pax"}, {"name": "Ruta del Vino & Bodegas", "desc": "Visita a bodegas de la D.O. Binissalem, catas de vino mallorquín, almuerzo en finca rural y paseo por los pueblos del interior.", "dur": "1 día completo", "group": "Grupos hasta 16 pax"}], "en": [{"name": "Tramuntana & Sóller", "desc": "Route through the Tramuntana mountains, stopping in Valldemossa, Deià and the picturesque Port of Sóller. UNESCO World Heritage.", "dur": "Full day", "group": "Groups up to 16 pax"}, {"name": "Formentor & Port de Pollença", "desc": "Visit to the Formentor Lighthouse, one of the most spectacular views in Mallorca, followed by the charming Port de Pollença.", "dur": "Full day", "group": "Groups up to 16 pax"}, {"name": "Coves del Drach & Porto Cristo", "desc": "The famous Dragon Caves with Europe's largest underground lake and a classical music concert. Stop in Porto Cristo.", "dur": "Half day (4–5h)", "group": "Groups up to 16 pax"}, {"name": "Palma City & Cathedral", "desc": "Tour of Palma's old town, La Seu Cathedral, the Almudaina Palace and the Santa Catalina neighbourhood.", "dur": "Half day (3–4h)", "group": "Groups up to 16 pax"}, {"name": "East Calas: Cala d'Or & Mondragó", "desc": "Discover the crystal-clear waters of the east coast: Cala d'Or, the Mondragó Natural Park and the quietest coves on the island.", "dur": "Full day", "group": "Groups up to 16 pax"}, {"name": "Wine Route & Wineries", "desc": "Visit to D.O. Binissalem wineries, Mallorcan wine tastings, lunch at a rural estate and a stroll through the inland villages.", "dur": "Full day", "group": "Groups up to 16 pax"}], "de": [{"name": "Tramuntana & Sóller", "desc": "Route durch das Tramuntana-Gebirge mit Stopps in Valldemossa, Deià und dem malerischen Hafen von Sóller. UNESCO-Welterbe.", "dur": "Ganztag", "group": "Gruppen bis 16 Pers."}, {"name": "Formentor & Port de Pollença", "desc": "Besuch des Leuchtturms von Formentor, einer der spektakulärsten Aussichten Mallorcas, gefolgt vom charmanten Port de Pollença.", "dur": "Ganztag", "group": "Gruppen bis 16 Pers."}, {"name": "Coves del Drach & Porto Cristo", "desc": "Die berühmten Drachenhöhlen mit Europas größtem Untersee und einem klassischen Konzert. Stopp in Porto Cristo.", "dur": "Halbtag (4–5 Std.)", "group": "Gruppen bis 16 Pers."}, {"name": "Palma Stadt & Kathedrale", "desc": "Rundgang durch Palmas Altstadt, die Kathedrale La Seu, den Almudaina-Palast und das Viertel Santa Catalina.", "dur": "Halbtag (3–4 Std.)", "group": "Gruppen bis 16 Pers."}, {"name": "Ostküste: Cala d'Or & Mondragó", "desc": "Entdecken Sie das kristallklare Wasser der Ostküste: Cala d'Or, den Naturpark Mondragó und die ruhigsten Buchten der Insel.", "dur": "Ganztag", "group": "Gruppen bis 16 Pers."}, {"name": "Weinroute & Weingüter", "desc": "Besuch der D.O. Binissalem Weingüter, mallorquinische Weinverkostungen, Mittagessen auf einem Landgut und Spaziergang durch die Innenstädte.", "dur": "Ganztag", "group": "Gruppen bis 16 Pers."}], "wa_es": ["Hola, quiero pedir presupuesto para la excursión: Tramuntana & Sóller. ¿Podéis indicarme precio para mi fecha y número de personas?", "Hola, quiero pedir presupuesto para la excursión: Formentor & Port de Pollença. ¿Podéis indicarme precio para mi fecha y número de personas?", "Hola, quiero pedir presupuesto para la excursión: Coves del Drach & Porto Cristo. ¿Podéis indicarme precio para mi fecha y número de personas?", "Hola, quiero pedir presupuesto para la excursión: Palma Ciudad & Catedral. ¿Podéis indicarme precio para mi fecha y número de personas?", "Hola, quiero pedir presupuesto para la excursión: Calas del Este. ¿Podéis indicarme precio para mi fecha y número de personas?", "Hola, quiero pedir presupuesto para la excursión: Ruta del Vino & Bodegas. ¿Podéis indicarme precio para mi fecha y número de personas?"], "wa_en": ["Hello, I'd like a quote for the excursion: Tramuntana & Sóller. Could you let me know the price for my date and number of people?", "Hello, I'd like a quote for the excursion: Formentor & Port de Pollença. Could you let me know the price for my date and number of people?", "Hello, I'd like a quote for the excursion: Coves del Drach & Porto Cristo. Could you let me know the price for my date and number of people?", "Hello, I'd like a quote for the excursion: Palma City & Cathedral. Could you let me know the price for my date and number of people?", "Hello, I'd like a quote for the excursion: East Calas. Could you let me know the price for my date and number of people?", "Hello, I'd like a quote for the excursion: Wine Route & Wineries. Could you let me know the price for my date and number of people?"], "wa_de": ["Hallo, ich möchte ein Angebot für den Ausflug: Tramuntana & Sóller. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?", "Hallo, ich möchte ein Angebot für den Ausflug: Formentor & Port de Pollença. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?", "Hallo, ich möchte ein Angebot für den Ausflug: Coves del Drach & Porto Cristo. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?", "Hallo, ich möchte ein Angebot für den Ausflug: Palma Stadt & Kathedrale. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?", "Hallo, ich möchte ein Angebot für den Ausflug: Ostküste. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?", "Hallo, ich möchte ein Angebot für den Ausflug: Weinroute & Weingüter. Können Sie mir den Preis für mein Datum und meine Personenanzahl mitteilen?"]};
   var excCards = document.querySelectorAll('.exc-card');
-  excCards.forEach(function(card) {
-    var lang_cap = l === 'es' ? 'Es' : l === 'en' ? 'En' : 'De';
+  excCards.forEach(function(card, i) {
+    var data = excData[l] && excData[l][i];
+    if (!data) return;
     var nameEl = card.querySelector('.exc-card-name');
     var descEl = card.querySelector('.exc-card-desc');
     var durEl  = card.querySelector('.exc-dur');
     var grpEl  = card.querySelector('.exc-group');
     var btn    = card.querySelector('.exc-btn');
-    if (nameEl) {
-      var n = card.getAttribute('data-name-' + l);
-      if (n) nameEl.textContent = n;
-    }
-    if (descEl) {
-      var d = card.getAttribute('data-desc-' + l);
-      if (d) descEl.textContent = d;
-    }
-    if (durEl) {
-      var du = card.getAttribute('data-dur-' + l);
-      if (du) durEl.textContent = du;
-    }
-    if (grpEl) {
-      var g = card.getAttribute('data-group-' + l);
-      if (g) grpEl.textContent = g;
-    }
+    if (nameEl) nameEl.textContent = data.name;
+    if (descEl) descEl.textContent = data.desc;
+    if (durEl)  durEl.textContent  = data.dur;
+    if (grpEl)  grpEl.textContent  = data.group;
     if (btn) {
-      var msg = btn.getAttribute('data-msg-' + l);
-      if (msg) btn.href = 'https://wa.me/34638110643?text=' + encodeURIComponent(msg);
+      var waMsg = excData['wa_'+l] && excData['wa_'+l][i];
+      if (waMsg) btn.href = 'https://wa.me/34638110643?text=' + encodeURIComponent(waMsg);
     }
   });
   mostrarPrecio();
@@ -1035,7 +1121,7 @@ function mostrarPrecio() {
   var t = TR[lang] || TR.es;
 
   if (!DEST) {
-    el.innerHTML = '<div class="cot-result-empty"><div class="cot-result-icon">🗺️</div><p>'+t.cot_empty+'</p></div>';
+    el.innerHTML = '<div class="cot-result-empty"><p>'+t.cot_empty+'</p></div>';
     return;
   }
 
@@ -1154,6 +1240,7 @@ function handleSubmit(e) {
 /* ---- IDIOMAS ---- */
 function setLang(l) {
   lang = l;
+  document.documentElement.setAttribute('lang', l);
   document.querySelectorAll('.lang-btn').forEach(function(b){
     b.classList.toggle('active', b.textContent === l.toUpperCase());
   });
@@ -1276,20 +1363,20 @@ ocument.getElementById('fLblContacto'); if(flc) flc.textContent=t.f_contacto;
   e=document.getElementById('excTitle'); if(e) e.innerHTML=t.exc_title;
   e=document.getElementById('excSub');   if(e) e.textContent=t.exc_sub;
   e=document.getElementById('navExcursiones'); if(e) e.textContent=t.nav_excursiones;
-  document.querySelectorAll('.exc-btn-txt').forEach(function(b){ b.textContent=t.exc_btn_txt; });
-  document.querySelectorAll('.exc-card').forEach(function(card) {
-    var nameEl = card.querySelector('.exc-card-name');
-    var descEl = card.querySelector('.exc-card-desc');
-    var durEl  = card.querySelector('.exc-dur');
-    var grpEl  = card.querySelector('.exc-group');
-    var btn    = card.querySelector('.exc-btn');
-    if (nameEl) { var n = card.getAttribute('data-name-' + l); if (n) nameEl.textContent = n; }
-    if (descEl) { var d = card.getAttribute('data-desc-' + l); if (d) descEl.textContent = d; }
-    if (durEl)  { var du = card.getAttribute('data-dur-' + l);  if (du) durEl.textContent = du; }
-    if (grpEl)  { var g = card.getAttribute('data-group-' + l); if (g) grpEl.textContent = g; }
-    if (btn)    { var msg = btn.getAttribute('data-msg-' + l);   if (msg) btn.href = 'https://wa.me/34638110643?text=' + encodeURIComponent(msg); }
-  });
-  mostrarPrecio();
+  document.querySelectorAll('.exc-btn-txt').forEach(function(b){b.textContent=t.exc_btn_txt;});
+  var EXC={"es": [{"n": "Tramuntana & Sóller", "d": "Ruta por la Sierra de Tramuntana, parada en Valldemossa, Deià y el pintoresco Puerto de Sóller. Patrimonio UNESCO.", "du": "1 día completo", "g": "Grupos hasta 16 pax", "wa": "Hola, quiero presupuesto para la excursión Tramuntana y Sóller. ¿Me indicáis precio para mi fecha y grupo?"}, {"n": "Formentor & Port de Pollença", "d": "Visita al Faro de Formentor, una de las vistas más espectaculares de Mallorca, seguida del encantador Port de Pollença.", "du": "1 día completo", "g": "Grupos hasta 16 pax", "wa": "Hola, quiero presupuesto para la excursión Formentor y Port de Pollença. ¿Me indicáis precio?"}, {"n": "Coves del Drach & Porto Cristo", "d": "Las famosas Coves del Drach con el lago subterráneo más grande de Europa y concierto de música clásica incluido.", "du": "Medio día (4-5h)", "g": "Grupos hasta 16 pax", "wa": "Hola, quiero presupuesto para la excursión Coves del Drach y Porto Cristo. ¿Me indicáis precio?"}, {"n": "Palma Ciudad & Catedral", "d": "Recorrido por el casco antiguo de Palma, la Catedral de La Seu, el Palau de l'Almudaina y el barrio de Santa Catalina.", "du": "Medio día (3-4h)", "g": "Grupos hasta 16 pax", "wa": "Hola, quiero presupuesto para la excursión Palma Ciudad y Catedral. ¿Me indicáis precio?"}, {"n": "Calas del Este: Cala d'Or & Mondragó", "d": "Descubre las aguas cristalinas de la costa este: Cala d'Or, el Parque Natural de Mondragó y las calas más tranquilas de la isla.", "du": "1 día completo", "g": "Grupos hasta 16 pax", "wa": "Hola, quiero presupuesto para la excursión por las Calas del Este. ¿Me indicáis precio?"}, {"n": "Ruta del Vino & Bodegas", "d": "Visita a bodegas de la D.O. Binissalem, catas de vino mallorquín, almuerzo en finca rural y paseo por pueblos del interior.", "du": "1 día completo", "g": "Grupos hasta 16 pax", "wa": "Hola, quiero presupuesto para la Ruta del Vino y Bodegas. ¿Me indicáis precio?"}], "en": [{"n": "Tramuntana & Sóller", "d": "Route through the Tramuntana mountains, with stops in Valldemossa, Deià and the picturesque Port of Sóller. UNESCO Heritage.", "du": "Full day", "g": "Groups up to 16 pax", "wa": "Hello, I would like a quote for the Tramuntana and Soller excursion. Price for my date and group?"}, {"n": "Formentor & Port de Pollença", "d": "Visit to Formentor Lighthouse, one of the most spectacular views in Mallorca, followed by the charming Port de Pollença.", "du": "Full day", "g": "Groups up to 16 pax", "wa": "Hello, I would like a quote for the Formentor excursion. Price for my date and group?"}, {"n": "Coves del Drach & Porto Cristo", "d": "The famous Dragon Caves with Europe's largest underground lake and classical music concert included. Stop in Porto Cristo.", "du": "Half day (4-5h)", "g": "Groups up to 16 pax", "wa": "Hello, I would like a quote for the Coves del Drach excursion. Price for my date and group?"}, {"n": "Palma City & Cathedral", "d": "Tour of Palma's old town, La Seu Cathedral, the Almudaina Palace and the Santa Catalina neighbourhood.", "du": "Half day (3-4h)", "g": "Groups up to 16 pax", "wa": "Hello, I would like a quote for the Palma City excursion. Price for my date and group?"}, {"n": "East Calas: Cala d'Or & Mondragó", "d": "Discover the crystal waters of the east coast: Cala d'Or, Mondragó Natural Park and the quietest coves on the island.", "du": "Full day", "g": "Groups up to 16 pax", "wa": "Hello, I would like a quote for the East Calas excursion. Price for my date and group?"}, {"n": "Wine Route & Wineries", "d": "Visit Binissalem wineries, Mallorcan wine tastings, lunch at a rural estate and a stroll through inland villages.", "du": "Full day", "g": "Groups up to 16 pax", "wa": "Hello, I would like a quote for the Wine Route excursion. Price for my date and group?"}], "de": [{"n": "Tramuntana & Sóller", "d": "Route durch das Tramuntana-Gebirge mit Stopps in Valldemossa, Deià und dem malerischen Hafen von Sóller. UNESCO-Welterbe.", "du": "Ganztag", "g": "Gruppen bis 16 Pers.", "wa": "Hallo, ich moechte ein Angebot fuer den Ausflug Tramuntana und Soeller. Preis fuer mein Datum und meine Gruppe?"}, {"n": "Formentor & Port de Pollença", "d": "Besuch des Leuchtturms von Formentor mit spektakulärem Ausblick, gefolgt vom charmanten Port de Pollença.", "du": "Ganztag", "g": "Gruppen bis 16 Pers.", "wa": "Hallo, ich moechte ein Angebot fuer den Ausflug Formentor. Preis fuer mein Datum?"}, {"n": "Coves del Drach & Porto Cristo", "d": "Die berühmten Drachenhöhlen mit Europas größtem Untersee und Konzert inklusive. Stopp in Porto Cristo.", "du": "Halbtag (4-5 Std.)", "g": "Gruppen bis 16 Pers.", "wa": "Hallo, ich moechte ein Angebot fuer den Ausflug Coves del Drach. Preis fuer mein Datum?"}, {"n": "Palma Stadt & Kathedrale", "d": "Rundgang durch Palmas Altstadt, die Kathedrale La Seu, den Almudaina-Palast und das Viertel Santa Catalina.", "du": "Halbtag (3-4 Std.)", "g": "Gruppen bis 16 Pers.", "wa": "Hallo, ich moechte ein Angebot fuer den Ausflug Palma Stadt. Preis fuer mein Datum?"}, {"n": "Ostküste: Cala d'Or & Mondragó", "d": "Entdecken Sie das kristallklare Wasser der Ostküste: Cala d'Or, den Naturpark Mondragó und ruhige Buchten.", "du": "Ganztag", "g": "Gruppen bis 16 Pers.", "wa": "Hallo, ich moechte ein Angebot fuer den Ostkuesten-Ausflug. Preis fuer mein Datum?"}, {"n": "Weinroute & Weingüter", "d": "Besuch der Binissalem Weingüter, Weinverkostungen, Mittagessen auf einem Landgut und Spaziergang durch Innenstädte.", "du": "Ganztag", "g": "Gruppen bis 16 Pers.", "wa": "Hallo, ich moechte ein Angebot fuer die Weinroute. Preis fuer mein Datum?"}]};
+  for(var xi=0;xi<6;xi++){
+    var xc=document.getElementById('exc-card-'+xi);
+    if(!xc||!EXC[l]||!EXC[l][xi]) continue;
+    var xr=EXC[l][xi];
+    var xn=xc.querySelector('.exc-card-name'); if(xn) xn.textContent=xr.n;
+    var xd=xc.querySelector('.exc-card-desc'); if(xd) xd.textContent=xr.d;
+    var xtags=xc.querySelectorAll('.exc-tag');
+    if(xtags[0]) xtags[0].textContent=xr.du;
+    if(xtags[1]) xtags[1].textContent=xr.g;
+    var xb=xc.querySelector('.exc-btn'); if(xb) xb.href='https://wa.me/34638110643?text='+encodeURIComponent(xr.wa);
+  }
+    mostrarPrecio();
 }
 </script>
 
