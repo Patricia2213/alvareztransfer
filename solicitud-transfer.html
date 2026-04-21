@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solicitud de Transfer — Álvarez Transfer</title>
+  <meta name="theme-color" content="#080808"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #E2C898;
+      --gold-dark: #9A7A4A;
+      --black: #080808;
+      --dark: #0f0f0f;
+      --card: #141414;
+      --border: rgba(201,169,110,0.2);
+      --text: #F0E8D8;
+      --muted: rgba(240,232,216,0.55);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background: #080808 !important;
+      background-color: #080808 !important;
+      min-height: 100%;
+    }
+
+    body {
+      background: #080808 !important;
+      background-color: #080808 !important;
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 20px 80px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, rgba(201,169,110,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Language bar ── */
+    .lang-bar {
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px 0 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .lang-switcher {
+      display: flex;
+      border: 1px solid var(--border);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .lang-btn:first-child { border-right: 1px solid var(--border); }
+    .lang-btn.active { background: rgba(201,169,110,0.12); color: var(--gold-light); }
+    .lang-btn:hover:not(.active) { color: var(--text); }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      margin: 36px 0 44px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .logo-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .logo-line::before,
+    .logo-line::after {
+      content: '';
+      width: 48px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .logo-line::after { background: linear-gradient(to left, transparent, var(--gold)); }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 5vw, 28px);
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 7vw, 54px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text);
+      margin-top: 28px;
+    }
+
+    h1 em { font-style: italic; color: var(--gold); }
+
+    .header-desc {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 460px;
+      line-height: 1.75;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Type selector ── */
+    .type-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .type-btn {
+      flex: 1;
+      max-width: 220px;
+      padding: 14px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .type-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .type-btn:hover { border-color: var(--gold-dark); color: var(--text); }
+    .type-btn:hover::after { width: 100%; }
+    .type-btn.active { border-color: var(--gold); color: var(--gold-light); background: rgba(201,169,110,0.07); }
+    .type-btn.active::after { width: 100%; }
+
+    /* ── Form card ── */
+    .form-card {
+      width: 100%;
+      max-width: 720px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 48px; right: 48px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin: 32px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title:first-of-type { margin-top: 0; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .section-num {
+      width: 22px; height: 22px;
+      border: 1px solid var(--gold-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      color: var(--gold-dark);
+      flex-shrink: 0;
+    }
+
+    /* ── Grid ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .span-2 { grid-column: span 2; }
+
+    @media (max-width: 560px) {
+      .form-card { padding: 28px 18px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .span-2 { grid-column: span 1; }
+      .type-selector { flex-direction: column; align-items: center; }
+      .form-card::before { left: 18px; right: 18px; }
+    }
+
+    /* ── Fields ── */
+    .field { display: flex; flex-direction: column; gap: 7px; }
+
+    label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    label .req { color: var(--gold); margin-left: 2px; }
+
+    input, select, textarea {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,169,110,0.15);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      padding: 12px 16px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.25s, background 0.25s;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(240,232,216,0.2); }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold-dark); background: rgba(201,169,110,0.04); }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A96E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    select option { background: #1a1a1a; color: var(--text); }
+    textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+    /* ── B2B fields ── */
+    .b2b-fields { display: none; }
+    .b2b-fields.visible { display: flex; flex-direction: column; gap: 7px; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    /* ── Checkbox ── */
+    .check-row { display: flex; align-items: flex-start; gap: 12px; margin-top: 24px; }
+
+    .check-row input[type="checkbox"] {
+      width: 16px; height: 16px;
+      flex-shrink: 0; margin-top: 2px;
+      cursor: pointer;
+      accent-color: var(--gold);
+    }
+
+    .check-row label {
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .check-row label a { color: var(--gold-dark); text-decoration: none; }
+
+    /* ── Submit ── */
+    .submit-wrap { margin-top: 36px; text-align: center; }
+
+    .btn-submit {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 16px 56px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.35s;
+    }
+
+    .btn-submit::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--gold);
+      transform: translateX(-101%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .btn-submit:hover { color: var(--black); }
+    .btn-submit:hover::before { transform: translateX(0); }
+    .btn-submit span { position: relative; z-index: 1; }
+    .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-submit:disabled::before { display: none; }
+
+    /* ── Messages ── */
+    .msg {
+      display: none;
+      margin-top: 24px;
+      padding: 16px 20px;
+      border: 1px solid;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .msg.success { border-color: rgba(100,200,100,0.4); color: #8ecf8e; background: rgba(100,200,100,0.05); }
+    .msg.error   { border-color: rgba(200,80,80,0.4);   color: #cf8e8e; background: rgba(200,80,80,0.05); }
+    .msg.visible { display: block; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      display: inline-block;
+      width: 13px; height: 13px;
+      border: 2px solid rgba(201,169,110,0.3);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .form-note {
+      margin-top: 28px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language switcher -->
+  <div class="lang-bar">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-line">
+      <span class="brand-name">Álvarez Transfer</span>
+    </div>
+    <div class="brand-sub">Calvià · Mallorca · Islas Baleares</div>
+    <h1 id="h1Title">Solicitud de <em>Transfer</em></h1>
+    <p class="header-desc" id="headerDesc">Complete el formulario y nos pondremos en contacto en menos de 2 horas para confirmar disponibilidad y precio.</p>
+  </header>
+
+  <!-- Client type -->
+  <div class="type-selector">
+    <button class="type-btn active" data-type="privado" onclick="setType('privado')">
+      <span data-es="Cliente Privado" data-en="Private Client">Cliente Privado</span>
+    </button>
+    <button class="type-btn" data-type="b2b" onclick="setType('b2b')">
+      <span data-es="Hotel / Agencia" data-en="Hotel / Agency">Hotel / Agencia</span>
+    </button>
+  </div>
+
+  <div class="form-card">
+    <form id="transferForm" novalidate>
+
+      <input type="hidden" name="tipo_cliente" id="tipo_cliente" value="privado"/>
+
+      <!-- 1 -->
+      <div class="section-title">
+        <span class="section-num">1</span>
+        <span data-es="Datos de Contacto" data-en="Contact Details">Datos de Contacto</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label><span data-es="Nombre" data-en="Name">Nombre</span> <span class="req">*</span></label>
+          <input type="text" name="nombre" id="nombre" placeholder="Su nombre completo" required/>
+        </div>
+        <div class="field">
+          <label><span data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</span> <span class="req">*</span></label>
+          <input type="tel" name="telefono" id="telefono" placeholder="+34 600 000 000" required/>
+        </div>
+        <div class="field span-2">
+          <label>Email <span class="req">*</span></label>
+          <input type="email" name="email" id="email" placeholder="contacto@empresa.com" required/>
+        </div>
+
+        <!-- B2B -->
+        <div class="field b2b-fields" id="b2b_empresa">
+          <label><span data-es="Nombre del Hotel / Agencia" data-en="Hotel / Agency Name">Nombre del Hotel / Agencia</span> <span class="req">*</span></label>
+          <input type="text" name="empresa" id="empresa" placeholder="Hotel Ejemplo Mallorca"/>
+        </div>
+        <div class="field b2b-fields" id="b2b_cargo">
+          <label><span data-es="Cargo / Departamento" data-en="Position / Department">Cargo / Departamento</span></label>
+          <input type="text" name="cargo" id="cargo" placeholder="Concierge, Reception…"/>
+        </div>
+        <div class="field b2b-fields span-2" id="b2b_cuenta">
+          <label><span data-es="¿Ya tenéis cuenta con nosotros?" data-en="Are you already a client?">¿Ya tenéis cuenta con nosotros?</span></label>
+          <select name="cuenta_existente" id="cuenta_existente">
+            <option value=""   data-es="— Seleccionar —"      data-en="— Select —">— Seleccionar —</option>
+            <option value="si" data-es="Sí, somos clientes"   data-en="Yes, existing client">Sí, somos clientes</option>
+            <option value="no" data-es="No, primer contacto"  data-en="No, first contact">No, primer contacto</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <!-- 2 -->
+      <div class="section-title">
+        <span class="section-num">2</span>
+        <span data-es="Detalles del Transfer" data-en="Transfer Details">Detalles del Transfer</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label><span data-es="Tipo de servicio" data-en="Service type">Tipo de servicio</span> <span class="req">*</span></label>
+          <select name="tipo_servicio" id="tipo_servicio" required>
+            <option value=""                  data-es="— Seleccionar —"              data-en="— Select —">— Seleccionar —</option>
+            <option value="aeropuerto_llegada" data-es="Transfer Aeropuerto → Destino" data-en="Airport → Destination">Transfer Aeropuerto → Destino</option>
+            <option value="aeropuerto_salida"  data-es="Transfer Destino → Aeropuerto" data-en="Destination → Airport">Transfer Destino → Aeropuerto</option>
+            <option value="ida_vuelta"         data-es="Ida y vuelta"                  data-en="Round trip">Ida y vuelta</option>
+            <option value="excursion"          data-es="Excursión privada"             data-en="Private excursion">Excursión privada</option>
+            <option value="ciclistas"          data-es="Transporte ciclistas"          data-en="Cyclist transport">Transporte ciclistas</option>
+            <option value="evento"             data-es="Evento / Boda"                 data-en="Event / Wedding">Evento / Boda</option>
+            <option value="charter"            data-es="Transfer náutico / Charter"    data-en="Nautical / Charter transfer">Transfer náutico / Charter</option>
+            <option value="otro"               data-es="Otro"                          data-en="Other">Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label><span data-es="Número de pasajeros" data-en="Passengers">Número de pasajeros</span> <span class="req">*</span></label>
+          <select name="pasajeros" id="pasajeros" required>
+            <option value=""      data-es="— Seleccionar —"          data-en="— Select —">— Seleccionar —</option>
+            <option value="1-4"   data-es="1 – 4 pasajeros"          data-en="1 – 4 passengers">1 – 4 pasajeros</option>
+            <option value="5-8"   data-es="5 – 8 pasajeros"          data-en="5 – 8 passengers">5 – 8 pasajeros</option>
+            <option value="9-12"  data-es="9 – 12 pasajeros"         data-en="9 – 12 passengers">9 – 12 pasajeros</option>
+            <option value="13-18" data-es="13 – 18 pasajeros"        data-en="13 – 18 passengers">13 – 18 pasajeros</option>
+            <option value="mas18" data-es="+18 (varios vehículos)"   data-en="+18 (multiple vehicles)">+18 (varios vehículos)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label><span data-es="Fecha del servicio" data-en="Service date">Fecha del servicio</span> <span class="req">*</span></label>
+          <input type="date" name="fecha" id="fecha" required/>
+        </div>
+        <div class="field">
+          <label><span data-es="Hora aproximada" data-en="Approximate time">Hora aproximada</span> <span class="req">*</span></label>
+          <input type="time" name="hora" id="hora" required/>
+        </div>
+        <div class="field">
+          <label><span data-es="Origen" data-en="Pick-up location">Origen</span> <span class="req">*</span></label>
+          <input type="text" name="origen" id="origen" placeholder="Aeropuerto PMI / Hotel / Dirección" required/>
+        </div>
+        <div class="field">
+          <label><span data-es="Destino" data-en="Drop-off location">Destino</span> <span class="req">*</span></label>
+          <input type="text" name="destino" id="destino" placeholder="Hotel / Puerto / Dirección" required/>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <!-- 3 -->
+      <div class="section-title">
+        <span class="section-num">3</span>
+        <span data-es="Información Adicional" data-en="Additional Information">Información Adicional</span>
+      </div>
+
+      <div class="grid-3">
+        <div class="field">
+          <label><span data-es="Vuelo (si aplica)" data-en="Flight (if applicable)">Vuelo (si aplica)</span></label>
+          <input type="text" name="vuelo" id="vuelo" placeholder="IB3456 / VY1234"/>
+        </div>
+        <div class="field">
+          <label><span data-es="Equipaje extra" data-en="Extra luggage">Equipaje extra</span></label>
+          <select name="equipaje" id="equipaje">
+            <option value="normal" data-es="Normal"         data-en="Standard">Normal</option>
+            <option value="bicis"  data-es="Bicicletas"     data-en="Bicycles">Bicicletas</option>
+            <option value="golf"   data-es="Palos de golf"  data-en="Golf clubs">Palos de golf</option>
+            <option value="surf"   data-es="Tablas / Surf"  data-en="Surfboards">Tablas / Surf</option>
+            <option value="mucho"  data-es="Mucho equipaje" data-en="Heavy luggage">Mucho equipaje</option>
+          </select>
+        </div>
+        <div class="field">
+          <label><span data-es="Silla de bebé" data-en="Baby seat">Silla de bebé</span></label>
+          <select name="silla_bebe" id="silla_bebe">
+            <option value="no" data-es="No necesaria" data-en="Not needed">No necesaria</option>
+            <option value="1"  data-es="1 silla"      data-en="1 seat">1 silla</option>
+            <option value="2"  data-es="2 sillas"     data-en="2 seats">2 sillas</option>
+          </select>
+        </div>
+        <div class="field" style="grid-column: span 3;">
+          <label><span data-es="Notas / Peticiones especiales" data-en="Notes / Special requests">Notas / Peticiones especiales</span></label>
+          <textarea name="notas" id="notas" placeholder="Indicaciones especiales, paradas adicionales, accesibilidad…"></textarea>
+        </div>
+      </div>
+
+      <!-- Privacy -->
+      <div class="check-row">
+        <input type="checkbox" id="privacidad" name="privacidad" required/>
+        <label for="privacidad" id="privacidadLabel">
+          Acepto que Álvarez Transfer SL trate mis datos personales para gestionar esta solicitud, de acuerdo con su <a href="#">Política de Privacidad</a>. Los datos no serán cedidos a terceros.
+        </label>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-wrap">
+        <button type="submit" class="btn-submit" id="btnEnviar">
+          <span id="btnText">Enviar Solicitud</span>
+        </button>
+      </div>
+
+      <div class="msg success" id="msgOk">✓ &nbsp;<span id="msgOkText">Solicitud recibida. Le contactaremos en menos de 2 horas.</span></div>
+      <div class="msg error"   id="msgErr">✕ &nbsp;<span id="msgErrText">Error al enviar. Escríbanos a</span> <strong>info@alvareztransfer.com</strong></div>
+
+    </form>
+
+    <p class="form-note">
+      <span id="whatsappNote">También puede contactarnos por WhatsApp:</span>
+      <strong>+34 XXX XXX XXX</strong>
+    </p>
+  </div>
+
+  <script>
+    let lang = 'es';
+
+    const t = {
+      es: {
+        h1:           'Solicitud de <em>Transfer</em>',
+        desc:         'Complete el formulario y nos pondremos en contacto en menos de 2 horas para confirmar disponibilidad y precio.',
+        privacidad:   'Acepto que Álvarez Transfer SL trate mis datos personales para gestionar esta solicitud, de acuerdo con su <a href="#">Política de Privacidad</a>. Los datos no serán cedidos a terceros.',
+        btnText:      'Enviar Solicitud',
+        sending:      'Enviando…',
+        msgOk:        'Solicitud recibida. Le contactaremos en menos de 2 horas.',
+        msgErr:       'Error al enviar. Escríbanos a',
+        whatsapp:     'También puede contactarnos por WhatsApp:',
+        privAlert:    'Por favor, acepte la política de privacidad para continuar.',
+        placeholders: {
+          nombre: 'Su nombre completo', telefono: '+34 600 000 000',
+          email: 'contacto@empresa.com', empresa: 'Hotel Ejemplo Mallorca',
+          cargo: 'Conserje, Recepción, TTOO…', origen: 'Aeropuerto PMI / Hotel / Dirección',
+          destino: 'Hotel / Puerto / Dirección', vuelo: 'IB3456 / VY1234',
+          notas: 'Indicaciones especiales, paradas adicionales, accesibilidad…'
+        }
+      },
+      en: {
+        h1:           'Transfer <em>Request</em>',
+        desc:         'Fill in the form and we will get back to you within 2 hours to confirm availability and price.',
+        privacidad:   'I agree that Álvarez Transfer SL processes my personal data to handle this transfer request, in accordance with its <a href="#">Privacy Policy</a>. Data will not be shared with third parties.',
+        btnText:      'Send Request',
+        sending:      'Sending…',
+        msgOk:        'Request received. We will contact you within 2 hours.',
+        msgErr:       'Sending error. Please write to us at',
+        whatsapp:     'You can also reach us on WhatsApp:',
+        privAlert:    'Please accept the privacy policy to continue.',
+        placeholders: {
+          nombre: 'Your full name', telefono: '+34 600 000 000',
+          email: 'contact@company.com', empresa: 'Example Hotel Mallorca',
+          cargo: 'Concierge, Reception…', origen: 'Airport PMI / Hotel / Address',
+          destino: 'Hotel / Port / Address', vuelo: 'IB3456 / VY1234',
+          notas: 'Special instructions, additional stops, accessibility…'
+        }
+      }
+    };
+
+    function setLang(l) {
+      lang = l;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === l));
+
+      // Translate [data-es] / [data-en] spans
+      document.querySelectorAll('[data-' + l + ']').forEach(el => {
+        el.textContent = el.getAttribute('data-' + l);
+      });
+
+      // Specific updates
+      document.getElementById('h1Title').innerHTML        = t[l].h1;
+      document.getElementById('headerDesc').textContent   = t[l].desc;
+      document.getElementById('privacidadLabel').innerHTML = t[l].privacidad;
+      document.getElementById('btnText').textContent      = t[l].btnText;
+      document.getElementById('msgOkText').textContent    = t[l].msgOk;
+      document.getElementById('msgErrText').textContent   = t[l].msgErr;
+      document.getElementById('whatsappNote').textContent = t[l].whatsapp;
+
+      // Placeholders
+      Object.entries(t[l].placeholders).forEach(([id, ph]) => {
+        const el = document.getElementById(id);
+        if (el) el.placeholder = ph;
+      });
+    }
+
+    function setType(type) {
+      document.getElementById('tipo_cliente').value = type;
+      document.querySelectorAll('.type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === type));
+      const show = type === 'b2b';
+      document.querySelectorAll('.b2b-fields').forEach(el => el.classList.toggle('visible', show));
+      const empresa = document.getElementById('empresa');
+      if (empresa) empresa.required = show;
+    }
+
+    document.getElementById('fecha').min = new Date().toISOString().split('T')[0];
+
+    document.getElementById('transferForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn   = document.getElementById('btnEnviar');
+      const txt   = document.getElementById('btnText');
+      const msgOk = document.getElementById('msgOk');
+      const msgErr= document.getElementById('msgErr');
+
+      if (!this.checkValidity()) { this.reportValidity(); return; }
+      if (!document.getElementById('privacidad').checked) {
+        alert(t[lang].privAlert); return;
+      }
+
+      btn.disabled = true;
+      txt.innerHTML = '<span class="spinner"></span>' + t[lang].sending;
+      msgOk.classList.remove('visible');
+      msgErr.classList.remove('visible');
+
+      const data = Object.fromEntries(new FormData(this).entries());
+      data.idioma = lang.toUpperCase();
+
+      try {
+        const res = await fetch('https://formspree.io/f/mbdqaqbe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          msgOk.classList.add('visible');
+          this.reset();
+          setType('privado');
+        } else { throw new Error('Error ' + res.status); }
+      } catch (err) {
+        console.error(err);
+        msgErr.classList.add('visible');
+      } finally {
+        btn.disabled = false;
+        txt.textContent = t[lang].btnText;
+      }
+    });
+  </script>
+</body>
+</html>
